@@ -55,15 +55,15 @@ length,up=int(input("Желаемая длинa пароля (целое чис�
 low,dig=input("нужны ли строчные буквы (да/нет): "),input("нужны ли цифры (да/нет): ")
 spec=input("нужны ли специальные символы (да/нет): ")
 alf_up,alf_low,alf_spec="QWERTYUIOPLKJMHNGBFVDCSXAZ","qwertyuioplkjmhngbfvdcsxaz",";:?,.<>`~[]{}|/-=+)(*&^%$#@!"
-password,key="",0
+password=""
 for i in range(length):
-    if up == "да" and key == 0:
+    if up == "да":
         password += random.choice(alf_up)
-    if low == "да" and key == 0:
+    if low == "да":
         password += random.choice(alf_low)
-    if dig == "да" and key == 0:
+    if dig == "да":
         password += str(random.randint(0,9))
-    if spec == "да" and key == 0:
+    if spec == "да":
         password += random.choice(alf_spec)
     if len(password) >= length:
         password=password[:length]
