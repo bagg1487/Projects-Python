@@ -6,12 +6,10 @@ for i in range(len(words)-1):
 print(words[-1])
 '''
 '''# 2
-sentence=input()
-print(sentence.split()[1],sentence.split()[0])
+print(' '.join(input().split()[::-1]))
 '''
 '''# 3
 def f(a):
-
     return '.'.join(a)
 print(f(input()))
 '''
