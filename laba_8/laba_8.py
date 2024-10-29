@@ -1,21 +1,21 @@
-#1
+# 1
 # array,alf,dig = [1,32,'qa','asd','qw',3,'z'],[],[]
 # for i in range(len(array)):
 #     dig.append(array[i]) if isinstance(array[i],int) else alf.append(array[i])
-# print(alf,dig)
+# print(alf,"\n",dig)
 #2
 # import random
 # array=[]
 # while len(array)<6:
 #     array.append(random.randint(1,49))
 # print(array)
-#3
+# 3
 # list,array=[1,3,45,789,0,-2,7020,-345678],[]
 # for i in range(len(list)-1):
 #     if list[i]<list[i+1]:
 #         array.append(list[i+1])
 # print(array)
-#4
+# 4
 # nums,dig,sum,low,max = input(),[],0,[],[]
 # dig.append(nums)
 # while nums != '':
@@ -25,10 +25,12 @@
 # for i in range(len(dig)):
 #     sum+=int(dig[i])
 #     ave=sum/len(dig)
-#     if int(dig[i])<int(ave):
-#         low.append(dig[i])
+# for q in range(len(dig)):
+#     if int(dig[q])<int(ave):
+#
+#         low.append(dig[q])
 #     else:
-#         max.append(dig[i])
+#         max.append(dig[q])
 # print(ave,low,max)
 #5
 # rost,rost1,a = [215, 207, 196, 176, 168, 166],int(input()),[]
@@ -53,7 +55,6 @@
 # for i in range(len(card)):
 #     if i % 2 != 0:
 #         sum_even+=int(card[i])
-#
 #     else:
 #         if (int(card[i])*2)<=9:
 #             sum_odd+=int(card[i])*2
