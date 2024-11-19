@@ -38,8 +38,8 @@
 #4
 # from random import *
 # import PySimpleGUI as sg
-# sg.theme("DarkPurple4")
-# #sg.theme_previewer()
+# sg.theme("DarkBrown")
+# sg.theme_previewer()
 # text_size=17
 # layout = [[sg.Text("Введите границы для рандома:",font=("Arial", text_size))],
 #     [sg.Text("Нижняя граница",font=("Arial", text_size), size=(20, 1)), sg.InputText(key="low", font=("Arial", text_size),size=(10, 1))],
@@ -64,14 +64,15 @@
 # import PySimpleGUI as sg
 # sg.theme("DarkPurple4")
 # text_size = 17
-# layout = [[sg.Text("Введите слово:",font=("Arial", text_size)),sg.InputText(key="word",font=("Arial", text_size),size=(10))],
+# layout = [[sg.Text("Добро пожаловать в игру \"Эрудит\" от самого сильного мага\n всея СибГУТИ Сергея Демина. Дерзайте ввести свое слово! ",font=("Arial", text_size)),sg.InputText(key="word",font=("Arial", text_size),size=(20,2))],
+#           [sg.Image(filename="example_3.png")],
 #           [sg.Button("Посчитать сумму о4ков",font=("Arial", text_size),size=(20,1))],
 #           [sg.Text("Сумма очков равна:",font=("Arial", text_size)),(sg.Text("",font=("Arial", text_size), key="Output"))]]
-# window = sg.Window("Эрудит", layout,size=(400,200))
+# window = sg.Window("ЧЕЙ?", layout,size=(1000,1000))
 # while 1:
 #      event, values = window.read()
 #      score = {'1': "AEILNORSTU", '2': 'DG', '3': 'BCMP', '4': 'FHVWY', '5': 'K', '8': 'JX', '10': 'QZ'}
-#      string = str(values["word"])
+#      string = str(values["word"]).upper()
 #      final_score = 0
 #      for symbol in string:
 #           for points in score:
