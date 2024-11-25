@@ -32,7 +32,7 @@
 # second_part_mail = list(emails.keys())
 # for names_list in first_part_mail:
 #     for i in range(len(names_list)):
-#         print(f'{names_list[i]}@{second_part_mail[j]} ',end=' ')
+#         print(f'{names_list[i]}@{second_part_mail[i]} ',end=' ')
 #     print()
 #     index_of_names_list += 1
 #4
