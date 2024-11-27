@@ -61,8 +61,7 @@
 #
 # sg.theme("DarkPurple3")
 # text_size=17
-# #images = ["demin_5.png", "demin_2.png", "demin_3.png","demin_4.png"]
-# images = ["nenado_0.png","nenado_1.png"]
+# images = ["demin_5.png", "demin_2.png", "demin_3.png","demin_4.png"]
 # layout = [[sg.Text("Привет, вы снова в игре от Сергея Демина. Тут нада тыкать кнопачки",font=("Arial", text_size))],
 #           [sg.Image(key="demin",size=(520,520))],
 #           [sg.Button("Прямой код",font=("Arial", text_size),size=(20,1)), sg.Button("Обратный код",font=("Arial", text_size),size=(20,1)),sg.Button("Дополнительный код",font=("Arial", text_size),size=(20,1))],
