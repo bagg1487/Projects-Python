@@ -1,72 +1,106 @@
 import PySimpleGUI as sg
 from random import *
+import webbrowser
+
 sg.theme("DarkPurple3")
+
 text_size = 14
-bot,human=0,0
-image_demin=["demin_static.png","demin_rock.gif","demin_paper.gif","demin_scirrors.gif"]
-image=['static.png',"rock.gif","paper.gif","scirrors.gif"]
-images = ["demin_5.png", "demin_2.png", "demin_3.png","demin_4.png"]
-layout=[[sg.Text("Камень, ножницы и бумага, дааааааа"),sg.Text(f"{bot}:{human}",key="score")],
-        [sg.Text("Введите количество раундов"),sg.Input(key="count_matches",size=(20,1))],
-        [sg.Image(key="demin"),sg.Image(key="kbn")],
-        [sg.Button("Камень"),sg.Button("Ножницы"),sg.Button("Бумага")]]
-layout2 = [[sg.Text("Выбери противника")],[sg.Button("Жалкий кусок железяки"),sg.Button("Потомственный маг")]]
+bot, human = 0, 0
+
+url = "https://1xlite-488389.top/ru?tag=s_3059277m_355c_151280&pb=50f0dbb198fc4ca08ad0a04a030fc2cf&click_id=674df308361e3900015f6607-12333&partner_id=151280"
+demin_rock = ["demin_rock_reversed.png", "demin_rock.png"]
+demin_scissors = ["demin_scissors_reversed.png", "demin_scissors.png"]
+demin_paper = ["demin_paper_reversed.png", "demin_paper.png"]
+image = ["rock.png","paper.png","scissors.png"]
+
+def score_updater():
+    window["user_score"].update(human)
+    window["bot_score"].update(bot)
+layout=[[sg.Text("Камень, ножницы и бумага, дааааааа",font=("Arial", text_size))],
+        [sg.Text("Ваш ход, cчет: ",font=("Arial", text_size)), sg.Text(human, key="user_score", font=("Arial", text_size)),sg.Text("Ход противника, cчет: ",font=("Arial", text_size),size=(50,1),justification="right", ), sg.Text(bot, key="bot_score",
+                font=("Arial", text_size))],
+        [sg.Image(filename='static.png', key="user_choice"),sg.Image(filename='static.png', key="bot_choice")],
+        [sg.Button("Камень",font=("Arial", text_size)),sg.Button("Ножницы",font=("Arial", text_size)),
+                sg.Button("Бумага",font=("Arial", text_size))],
+        [sg.Button("", image_filename="1xbet.png", image_size=(200, 80), key="add")]]
+
+layout2 = [[sg.Text("Выбери противника",font=("Arial", text_size))],[sg.Button("Жалкий кусок железяки",
+                font=("Arial", text_size)),sg.Button("Потомственный маг",font=("Arial", text_size))],
+           [sg.Text("Введите количество раундов",font=("Arial", text_size)),sg.Input(key="count_matches",size=(20,1))]]
+
 choice_bot = sg.Window("Чей????",layout2)
+bot_move = choice(image)
+
 while 1:
     choice_of, values_of = choice_bot.read()
-    print(choice_of, values_of)
-    if choice_of == sg.WINDOW_CLOSED:
-        break
-    if choice_of == "Жалкий кусок железяки" or choice_of == "Потомственный маг":
-        choice_bot.close()
-        window = sg.Window('ЧЕЙ?', layout)
-        while 1:
-            event, values = window.read()
-            window["kbn"].update(filename=images[0])
-            if choice_of == "Потомственный маг":
-                window["demin"].update(filename=images[0])
-                if event == "Камень":
-                    bot_xod = randint(1, 3)
-                    window["kbn"].update(filename=images[1])
-                    window["demin"].update(filename=images[bot_xod])
-                    if bot_xod == 2:
-                        bot += 1
-                    elif bot_xod == 3:
-                        human += 1
-                elif event == "Бумага":
-                    window["kbn"].update(filename=images[2])
-                    window["demin"].update(filename=images[3])
-                    if bot_xod == 3:
-                        bot += 1
-                    elif bot_xod == 1:
-                        human += 1
-                elif event == "Ножницы":
-                    window["kbn"].update(filename=images[3])
-                    window["demin"].update(filename=images[1])
-                    if bot_xod == 1:
-                        bot += 1
-                    elif bot_xod == 3:
-                        human += 1
-            if choice_of == "Потомственный маг":
-                window["demin"].update(filename=images[1])
-                if event == "Камень":
-                    window["kbn"].update(filename=images[1])
-                    window["demin"].update(filename=images[2])
-                    bot += 1
-                elif event == "Бумага":
-                    window["kbn"].update(filename=images[2])
-                    window["demin"].update(filename=images[3])
-                    bot += 1
-                elif event == "Ножницы":
-                    window["kbn"].update(filename=images[3])
-                    window["demin"].update(filename=images[1])
-                    bot += 1
-            if event == sg.WINDOW_CLOSED or bot+human == window["count_matches"]:
-                if bot > human:
-                    sg.popup("вы проиграли!((")
-                elif bot < human:
-                    sg.popup("Вы выиграли!)")
-                else:
-                    sg.popup("Ничья!")
-                break
+    if choice_of == "Жалкий кусок железяки" or choice_of == "Потомственный маг" or choice_of == sg.WINDOW_CLOSED:
+        if values_of["count_matches"] == "" or not(values_of["count_matches"].isdigit()):
+                sg.popup("Введите количество раундов",font=("Arial", text_size))
+        else:
+            choice_bot.close()
+            break
+
+window = sg.Window('ЧЕЙ?', layout)
+while 1:
+    event, values = window.read()
+
+    if event == "add":
+        webbrowser.open(url)
+
+    if choice_of == "Жалкий кусок железяки":
+
+        if event == "Камень":
+            bot_move = choice(image)
+            window["user_choice"].update(filename="rock.png")
+            window["bot_choice"].update(filename=image[image.index(bot_move)])
+            if bot_move == "paper.png":
+                bot += 1
+            elif bot_move == "scissors.png":
+                human += 1
+            score_updater()
+
+        if event == "Бумага":
+            bot_move = choice(image)
+            window["user_choice"].update(filename="paper.png")
+            window["bot_choice"].update(filename=image[image.index(bot_move)])
+            if bot_move == "scissors.png":
+                bot += 1
+            elif bot_move == "rock.png":
+                human += 1
+            score_updater()
+
+        if event == "Ножницы":
+            bot_move = choice(image)
+            window["user_choice"].update(filename="scissors.png")
+            window["bot_choice"].update(filename=image[image.index(bot_move)])
+            if bot_move == "rock.png":
+                bot += 1
+            elif bot_move == "paper.png":
+                human += 1
+            score_updater()
+
+
+    if choice_of == "Потомственный маг":
+        if event == "Камень":
+            window["user_choice"].update(filename="rock.png")
+            window["bot_choice"].update(filename=choice(demin_paper))
+            bot += 1
+        elif event == "Бумага":
+            window["user_choice"].update(filename="paper.png")
+            window["bot_choice"].update(filename=choice(demin_scissors))
+            bot += 1
+        elif event == "Ножницы":
+            window["user_choice"].update(filename="scissors.png")
+            window["bot_choice"].update(filename=choice(demin_rock))
+            bot += 1
+
+    if event == sg.WINDOW_CLOSED or bot == human == choice_bot["count_matches"] or #:
+        if bot > human:
+            sg.popup(f"вы проиграли!(( Счет: {human}:{bot}",font=("Arial", text_size))
+        elif bot < human:
+            sg.popup(f"Вы выиграли!)Счет: {human}:{bot}",font=("Arial", text_size))
+        else:
+            sg.popup(f"Ничья! Счет: {human}:{bot}",font=("Arial", text_size))
         window.close()
+        break
+
