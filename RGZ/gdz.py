@@ -5,7 +5,7 @@ import webbrowser
 sg.theme("DarkPurple3")
 
 text_size = 14
-bot, human = 0, 0
+bot, human,c = 0, 0, 0
 
 url = "https://1xlite-488389.top/ru?tag=s_3059277m_355c_151280&pb=50f0dbb198fc4ca08ad0a04a030fc2cf&click_id=674df308361e3900015f6607-12333&partner_id=151280"
 demin_rock = ["demin_rock_reversed.png", "demin_rock.png"]
@@ -50,6 +50,7 @@ while 1:
     if choice_of == "Жалкий кусок железяки":
 
         if event == "Камень":
+            c += 1
             bot_move = choice(image)
             window["user_choice"].update(filename="rock.png")
             window["bot_choice"].update(filename=image[image.index(bot_move)])
@@ -60,6 +61,7 @@ while 1:
             score_updater()
 
         if event == "Бумага":
+            c += 1
             bot_move = choice(image)
             window["user_choice"].update(filename="paper.png")
             window["bot_choice"].update(filename=image[image.index(bot_move)])
@@ -70,6 +72,8 @@ while 1:
             score_updater()
 
         if event == "Ножницы":
+            c += 1
+            print(c)
             bot_move = choice(image)
             window["user_choice"].update(filename="scissors.png")
             window["bot_choice"].update(filename=image[image.index(bot_move)])
@@ -94,13 +98,13 @@ while 1:
             window["bot_choice"].update(filename=choice(demin_rock))
             bot += 1
 
-    if event == sg.WINDOW_CLOSED or bot == human == choice_bot["count_matches"] or #:
+    if event == sg.WINDOW_CLOSED or c == int(values_of["count_matches"]):
+        window.close()
         if bot > human:
             sg.popup(f"вы проиграли!(( Счет: {human}:{bot}",font=("Arial", text_size))
         elif bot < human:
             sg.popup(f"Вы выиграли!)Счет: {human}:{bot}",font=("Arial", text_size))
         else:
             sg.popup(f"Ничья! Счет: {human}:{bot}",font=("Arial", text_size))
-        window.close()
         break
 
