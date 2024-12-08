@@ -5,7 +5,7 @@ import webbrowser
 sg.theme("DarkPurple3")
 
 text_size = 14
-bot, human,c = 0, 0, 0
+bot, human,сount = 0, 0, 0
 
 url = "https://1xlite-488389.top/ru?tag=s_3059277m_355c_151280&pb=50f0dbb198fc4ca08ad0a04a030fc2cf&click_id=674df308361e3900015f6607-12333&partner_id=151280"
 demin_rock = ["demin_rock_reversed.png", "demin_rock.png"]
@@ -26,7 +26,8 @@ layout=[[sg.Text("Камень, ножницы и бумага, дааааааа
 
 layout2 = [[sg.Text("Выбери противника",font=("Arial", text_size))],[sg.Button("Жалкий кусок железяки",
                 font=("Arial", text_size)),sg.Button("Потомственный маг",font=("Arial", text_size))],
-           [sg.Text("Введите количество раундов",font=("Arial", text_size)),sg.Input(key="count_matches",size=(20,1))]]
+           [sg.Text("Введите имя",font=("Arial", text_size)),sg.Push(),sg.Input(key="name_of_user",size=(20,1),font=("Arial", text_size))],
+           [sg.Text("Введите количество раундов",font=("Arial", text_size)),sg.Input(key="count_matches",size=(20,1), font=("Arial", text_size))]]
 
 choice_bot = sg.Window("Чей????",layout2)
 bot_move = choice(image)
@@ -35,7 +36,9 @@ while 1:
     choice_of, values_of = choice_bot.read()
     if choice_of == "Жалкий кусок железяки" or choice_of == "Потомственный маг" or choice_of == sg.WINDOW_CLOSED:
         if values_of["count_matches"] == "" or not(values_of["count_matches"].isdigit()):
-                sg.popup("Введите количество раундов",font=("Arial", text_size))
+                sg.popup("Введите количество раундов", font=("Arial", text_size))
+        elif values_of["name_of_user"] == "" or values_of["name_of_user"].isdigit():
+            sg.popup("Ну имя то введи", font=("Arial", text_size))
         else:
             choice_bot.close()
             break
@@ -50,7 +53,7 @@ while 1:
     if choice_of == "Жалкий кусок железяки":
 
         if event == "Камень":
-            c += 1
+            сount += 1
             bot_move = choice(image)
             window["user_choice"].update(filename="rock.png")
             window["bot_choice"].update(filename=image[image.index(bot_move)])
@@ -61,7 +64,7 @@ while 1:
             score_updater()
 
         if event == "Бумага":
-            c += 1
+            сount += 1
             bot_move = choice(image)
             window["user_choice"].update(filename="paper.png")
             window["bot_choice"].update(filename=image[image.index(bot_move)])
@@ -72,8 +75,8 @@ while 1:
             score_updater()
 
         if event == "Ножницы":
-            c += 1
-            print(c)
+            сount += 1
+
             bot_move = choice(image)
             window["user_choice"].update(filename="scissors.png")
             window["bot_choice"].update(filename=image[image.index(bot_move)])
@@ -89,16 +92,22 @@ while 1:
             window["user_choice"].update(filename="rock.png")
             window["bot_choice"].update(filename=choice(demin_paper))
             bot += 1
+            сount += 1
+            score_updater()
         elif event == "Бумага":
             window["user_choice"].update(filename="paper.png")
             window["bot_choice"].update(filename=choice(demin_scissors))
             bot += 1
+            сount += 1
+            score_updater()
         elif event == "Ножницы":
             window["user_choice"].update(filename="scissors.png")
             window["bot_choice"].update(filename=choice(demin_rock))
             bot += 1
+            сount += 1
+            score_updater()
 
-    if event == sg.WINDOW_CLOSED or c == int(values_of["count_matches"]):
+    if event == sg.WINDOW_CLOSED or сount == int(values_of["count_matches"]):
         window.close()
         if bot > human:
             sg.popup(f"вы проиграли!(( Счет: {human}:{bot}",font=("Arial", text_size))
@@ -108,3 +117,6 @@ while 1:
             sg.popup(f"Ничья! Счет: {human}:{bot}",font=("Arial", text_size))
         break
 
+with open('game_data.txt', 'a', encoding='utf-8') as file:
+    file.write(f"{values_of["name_of_user"]} {human}:{bot}\n")
+file.close()
