@@ -1,13 +1,10 @@
 import PySimpleGUI as sg
 from random import *
-import webbrowser
 
 sg.theme("DarkPurple3") # Устанавливаем тему для окна
 
 text_size = 14 # размер шрифта
 bot, human,сount = 0, 0, 0 # Счет бота, игрока и количество сыгранных раундов
-# URL для рекламной ссылки
-url = "https://1xlite-488389.top/ru?tag=s_3059277m_355c_151280&pb=50f0dbb198fc4ca08ad0a04a030fc2cf&click_id=674df308361e3900015f6607-12333&partner_id=151280"
 # Списки изображений для различных ходов
 demin_rock = ["demin_rock_reversed.png", "demin_rock.png"]
 demin_scissors = ["demin_scissors_reversed.png", "demin_scissors.png"]
@@ -53,9 +50,6 @@ while 1:
 window = sg.Window('ЧЕЙ?', layout)# Основное окно игры
 while 1:
     event, values = window.read()# Чтение событий и значений
-
-    if event == "add": # Переход по рекламе
-        webbrowser.open(url)
 
     if choice_of == "Жалкий кусок железяки": # Логика для первого типа бота
         if event == "Камень":
